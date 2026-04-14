@@ -11,7 +11,7 @@ use crate::ActiveTheme;
 #[cfg(not(target_os = "linux"))]
 pub(crate) const SHADOW_SIZE: Pixels = px(0.0);
 #[cfg(target_os = "linux")]
-pub(crate) const SHADOW_SIZE: Pixels = px(12.0);
+pub(crate) const SHADOW_SIZE: Pixels = px(0.0);
 const BORDER_SIZE: Pixels = px(1.0);
 pub(crate) const BORDER_RADIUS: Pixels = px(0.0);
 
@@ -114,7 +114,8 @@ impl RenderOnce for WindowBorder {
                             move |_bounds, hitbox, window, _| {
                                 let mouse = window.mouse_position();
                                 let size = window.window_bounds().get_bounds().size;
-                                let Decorations::Client { tiling } = window.window_decorations() else {
+                                let Decorations::Client { tiling } = window.window_decorations()
+                                else {
                                     return;
                                 };
                                 if tiling.top && tiling.bottom && tiling.left && tiling.right {
